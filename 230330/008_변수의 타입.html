@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>논리연산_실무예제</title>
+</head>
+<body>
+    <script>
+        // 원시타입 string, number, bigint, boolean, undefined, symbol, null
+        let str1 = 'hello';
+        let str2 = str1;
+        console.log(str1);
+        console.log(str2); // 'hello'
+
+        str1 = 'world';
+        console.log(str1);
+        console.log(str2); // str2에 할당된 값은 여전히 'hello' 입니다.
+
+        // string
+        console.log(typeof 'hello');
+        console.log(typeof "hello");
+        // 이스케이프 문자
+        console.log(typeof 'i\'m so happy');
+        console.log('h\ne\nl\nl\no')
+        
+        // number
+        console.log(typeof 10)
+        console.log(typeof 10.1)
+        console.log(typeof NaN)
+
+        // boolean
+        console.log(typeof true)
+        console.log(typeof false)
+
+        // undefined -값이 없으면
+        console.log(typeof undefined)
+        let a;
+        console.log(a)
+
+        // null(값이 비어있음을 명시적으로 나타냄) - 원시타입 근데 왜 object가 나오지..? 둘 다 맞다고 봐도 괜찮음
+        console.log(typeof null) // 설계 오류인 것을 개발자가 인정
+
+        // bigint (2^53 - 1 보다 큰 정수를 계산할 때 n을 사용, 아니면 결과가 달라짐)
+        console.log(90071992547409960n + 90071992547409960n)
+        console.log(90071992547409960 + 90071992547409960)
+        console.log(typeof 90071992547409960n) //bigint
+
+        // symbol
+        console.log(typeof Symbol())
+
+        /////////////
+
+        //Object
+        console.log(typeof function(){}) //function
+
+        // Object
+        console.log(typeof [10, 20, 30]) //배열 그러면서 Object ...??!!!
+        console.log(typeof {a: 10, b: 20}) //Object
+        console.log(typeof /정규표현식/gi)
+
+        // 형변환(number -> string, string -> number)
+        console.log(+'10')
+        console.log(Number('10')) // 권하지 않음
+        console.log(parseInt('10')) // 권장
+        console.log(parseFloat('10.1')) // 권장
+        console.log(parseInt(true)) //NaN
+        console.log(parseInt(false)) //NaN
+        console.log(Number(true)) // 1
+        console.log(Number(false)) // 0
+
+        let hojun = 10;
+        console.log(hojun.toString())
+        // 10.toString() 10.까지를 소숫점으로 본다.
+        console.log('' + 10)
+        console.log(String(10))
+
+        // 형변환(다른 type -> boolean)
+        let hojun2 = 10;
+        console.log(Boolean(-1))
+        console.log(Boolean(0))
+        console.log(Boolean(1000))
+        console.log(!!1000)
+        console.log(!!hojun2)
+    </script>
+</body>
+</html>
