@@ -85,3 +85,19 @@ const test3 =[
 for (const [i, j, ...k] of test3){
     console.log(i, j, k);
 }
+
+// 실행코드
+Math.max(...[10, 20, 30])
+Math.min(...[10, 20, 30])
+Math.max(...[10, 20, 30, [11, 12, 13, [20, 40, 50]]].flat(Infinity));
+
+// 오류 코드
+Math.max([10, 20, 30]);
+Math.max([10, 20, 30], [11, 12, 13, [20, 40, 50]]);
+Math.max([10, 20, 30, [11, 12, 13, [20, 40, 50]]].flat(Infinity));
+
+// 자주 사용되는 코드
+const s = 'hello world';
+[s] // s.split()
+// [...s] // s.split('')
+// {...s} 이렇게 전개할 이유는 없다.
