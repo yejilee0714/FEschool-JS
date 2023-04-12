@@ -1,3 +1,4 @@
+// 4월 4일 코드
 // 함수의 일반적인 형태
 // 1. 재사용성이 높아집니다.
 function one(){
@@ -121,7 +122,7 @@ function hello5() {
     if (true) {
         if (false) { // 이 값을 바꿔보세요.
             if (true) {
-                return
+                return // return문이 종료문으로 사용된다.
             }
         }
     }
@@ -191,10 +192,14 @@ function 함수1(x, y) {
     return x + y
 }
 // 위 함수를 화살표 함수로 작성하면 아래와 같습니다.
-let 함수1 = (x, y) => x + y
+let 함수1 = (x, y) => x + y // 리턴문이 바로 뒤에 있는 경우 {} 생략 가능(구문이 1개인 경우)
 
 // 만악 함수 실행시 전달하는 인자가 한 개라면 소괄호를 생략할 수 있습니다.
+// 코파일럿..!!!!
 let 함수2 = x => {
+    if (turn){
+        console.log('hello world')
+    } // 구문이 2개 이상일 경우 {} 사용
     return x + 10
 }
 
@@ -214,3 +219,127 @@ function 함수() {
 }
 
 함수()
+
+// 4월 12일 코드
+// 1. object처럼 사용되는 함수의 특성
+function 함수 (a, b){
+    return a + b;
+}
+
+function 함수2 (a, b, c){
+    const z = a+ b+ c;
+    return z
+}
+
+function 함수3 (a, b, c, d, e, f){
+    const z = a+ b+ c+ d+ e+ f;
+    return z
+}
+
+console.dir(함수1);
+console.dir(함수2);
+console.dir(함수3);
+
+// length가 파라미터의 수인 것을 확인했습니다.
+
+// array, object, function가 모두 같은 방식으로 접근하거나 값을 변경할 수 있네...?
+함수['location'] = 'jeju';
+console.dir(함수);
+
+함수['name'] = 'jejufunction';
+console.dir(함수);
+// console.dir(jejufunction); // 이렇게 호출하면 안된다.
+
+함수['length'] = 5;
+console.dir(함수); // 변경되지 않음
+
+
+// 2. 아규먼트가 순서대로 들어가는 함수의 특성
+function 함수(a = 10, b = 20, c = 30){
+    return a+ b+ c
+}
+
+함수();
+함수(100);
+함수(100, 200);
+함수(100, 200, 300);
+함수( c= 300 ); // 330이 아니고 350, 순서대로 들어간다. a=300, b=20, c=30
+함수( a = 100, c= 300 ); // 430, a= 100, b= 300, c= 30
+함수( a = 100, c= 300, b= 200 ); // 이처럼 순서가 뒤바뀌면 hell...
+
+// 3. roro기법 원리 설명
+// roro 기법은 무엇인가? 입력되는 아규먼트가 매우 많은 아래 함수의 경우 호출 하는 쪽에서 어떤 값이 들어가는지 명확히 알기 어렵다.
+window.addNewControl("Title", 20, 50, 100, 50, true);
+// 코드를 쭉 읽다가 위의 함수를 만나면 어떨까.... 저렇게 함수명을 짜면 실무에서 힘들다.
+
+// python 형식
+window.addNewControl(
+    title="Title",
+    xPosition=20,
+    yPosition=50,
+    width=100,
+    height=50,
+    drawingNow=true
+); // 이름, value 형식으로 작성
+
+// roro 기법을 모든 함수에서 사용하는가?
+function sum(a, b){
+
+}
+
+// 어떻게 사용하고 원리는 무엇인가?
+function 로그인정보({
+    회원등급 = 'Gold',
+    글쓰기 = true,
+    글읽기 = true,
+    채널관리 = true,
+    백업 = '1주일 이내 가능',
+    소셜로그인여부 = true
+}){
+    console.log('...함수 기능...');
+    console.log(회원등급, 글쓰기, 글읽기, 채널관리, 백업, 소셜로그인여부);
+}
+
+로그인정보({
+    회원등급: 'Silver',
+    소셜로그인여부: false, // 순서가 바뀜
+    백업 : '3일 이내 가능' // 중간에 생략된 값이 있음
+})
+
+// 원리 (몰라도 코딩하는데 지장있지 않음)
+let one
+let two1
+let three1
+
+let four = {one, two1, three1}; 
+// {one: undefined, two: undefined, three: undefined}
+// 이렇게 사용할 수 있게 된 것은 최근이다.
+// '이렇게' : 변수 값을 object 안에 넣으면 변수명이 key가 되고 변수의 값이 object의 value가 되는 문법을 얘기한다.
+
+let {one, two2, three2} = {one: 10, two2: 20, three2: 30};
+let {one, two3, three3} = {two3: 20, one: 10, three3: 30};
+// 왼쪽에서 one, two, three는 변수
+// let {one: 10, two4, three4} = {two4: 20, one: 10, three4: 30}; // error
+let {one= 100, two5, three5} = {two5: 20, one: 10, three5: 30}; 
+
+// 살짝 심화
+// 위 코드에서 로그인정보({}) 호출 했을 때에는 error가 안나지만 로그인정보() 호출했을 경우 error가 발생
+function 함수({
+    a = 2,
+    b = 1,
+    c = 3
+} = {}){
+    console.log(a, b, c)
+    return a + b + c
+}
+
+함수(); //6
+함수({}); //6
+함수({b: 100}); //105
+
+// 참고삼아서만 알아두세요.
+// let {one = 1, two = 2} = {one:100}
+// let {one = 1, two = 2} = {}
+// let {a=10, b=20, c=30} = undefined
+
+// https://www.howdy-mj.me/javascript/early-return
