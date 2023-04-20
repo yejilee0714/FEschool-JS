@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TodoList</title>
+</head>
+<body>
+    
+    <script>
+        // 1. 할 것 객체
+        class Todo {
+            constructor(item, finishied){
+                this.item = item;
+                this.finishied = finishied;
+            }
+            changeState(){
+                this.finishied = !this.finishied;
+            }
+        }
+
+        class TodoManager{
+            constructor(){
+                this.todoList = [];
+            }
+
+            addItem(item, finishied = false){
+                const todo = new Todo(item, finishied);
+                this.todoList.push(todo);
+            }
+            
+            getItems(){
+                return this.todoList;
+            }
+            getLeftTodoCount(){
+                return this.todoList.filter((item) => item.finishied === false).length;
+                // this.todoList.reduce((total, current) => {
+                //     if(current.finishied === false){
+                //         return ++total;
+                //     } else {
+                //         return total;
+                //     }
+                // }, 0); // 초기값 0
+            }
+        }
+
+        const todo = new Todo('점심먹기', false);
+        console.log(todo);
+        todo.changeState();
+        console.log(todo);
+
+        const manager = new TodoManager();
+        manager.addItem('청소하기');
+        manager.addItem('밥하기');
+        manager.addItem('빨래하기');
+        console.log(manager.getItems());
+        manager.getItems()[2].changeState();
+
+    </script>
+</body>
+</html>
