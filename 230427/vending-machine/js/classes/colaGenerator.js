@@ -5,7 +5,6 @@ class ColaGenerator {
 
     async setup() {
         const response = await this.loadData();
-
         this.colaFactory(response);
     }
 
@@ -37,12 +36,10 @@ class ColaGenerator {
             `;
 
             item.innerHTML = itemTemplate;
-            this.itemList.append(item);
+            docFrag.append(item);
         })
-
+        this.itemList.append(docFrag);
     }
-
-
 }
 
 export default ColaGenerator;
